@@ -6,18 +6,58 @@
 <script src="http://www.youtube.com/player_api"></script>
 <script type="text/javascript">
 	<?php
+	include 'config.php';
 	$all_array = array();
 	
-	$PerfectElectroMusic = getVideosFromPlaylist("UUtCcPJl-cIG-mRiIyg-PKsQ?max-results=50");
-	$LDM = getVideosFromPlaylist("UUDl6xIISC4tm38lzmcHvDiQ?max-results=50");
-	$xKito = getVideosFromPlaylist("UUMOgdURr7d8pOVlc-alkfRg?max-results=50");
-	$MrSuicideSheep = getVideosFromPlaylist("UU5nc_ZtjKW1htCVZVRxlQAQ?max-results=50");
+	$PerfectElectroMusic = getVideosFromPlaylistV3($key, "UUtCcPJl-cIG-mRiIyg-PKsQ");
+	$LDM = getVideosFromPlaylistV3($key, "UUDl6xIISC4tm38lzmcHvDiQ");
+	$xKito = getVideosFromPlaylistV3($key, "UUMOgdURr7d8pOVlc-alkfRg");
+	$MrSuicideSheep = getVideosFromPlaylistV3($key, "UU5nc_ZtjKW1htCVZVRxlQAQ");
 	
 	$all_array = array_merge($PerfectElectroMusic, $LDM, $xKito, $MrSuicideSheep);
 	shuffle($all_array);
 	
+	function getSSLPageContents($url) {
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($ch, CURLOPT_HEADER, false);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_REFERER, "instancedev.com");
+
+		curl_setopt( $c, CURLOPT_TIMEOUT, 1 );
+
+		$result = curl_exec($ch);
+		curl_close($ch);
+		return $result;
+	}
+
+	// uses google api v3
+	function getVideosFromPlaylistV3($key, $str){
+		$contents = getSSLPageContents("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=".$str."&key=".$key);
+		$lastvideoPos = 0;
+		$lasttitlePos =0;
+		$videos = array();
+
+		$i = 0;
+		
+		while (($lastvideoPos = strpos($contents, '"videoId": "', $lastvideoPos)) !== false) {
+			$pos = $lastvideoPos + strlen('"videoId": "');
+			$lasttitlePos = strpos($contents, '"title": "', $lasttitlePos) + strlen('"title": "');
+			$video = substr($contents, $pos,  strpos($contents, '"', $pos + 1) - $pos);
+			$title = substr($contents, $lasttitlePos,  strpos($contents, '"', $lasttitlePos + 1) - $lasttitlePos);
+			$videos[$i] = array($video, $title);
+			$i++;
+			$lastvideoPos = $pos;
+		}
+		
+		return $videos;
+	}
+	
+	// google api v2
 	function getVideosFromPlaylist($str){
-		$contents = file_get_contents("http://gdata.youtube.com/feeds/api/playlists/".$str);
+		$contents = file_get_contents("http://gdata.youtube.com/feeds/api/playlists/".$str."max-results=50");
 		$lastvideoPos = strpos($contents, "<link rel='alternate' type='text/html'") + 1;
 		$lasttitlePos = strpos($contents, "<title type='text'>") + 1;
 		$videos = array();
