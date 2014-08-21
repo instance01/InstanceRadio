@@ -10,3 +10,7 @@ Will currently play the 50 latest video uploads from the following channels and 
 - LDM
 - xKito
 - MrSuicideSheep
+- NoCopyrightSounds
+- MixHound
+- AirwaveMusicTV
+- Proximity
