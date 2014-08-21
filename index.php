@@ -13,7 +13,11 @@
 	$LDM = getVideosFromPlaylistV3($key, "UUDl6xIISC4tm38lzmcHvDiQ");
 	$xKito = getVideosFromPlaylistV3($key, "UUMOgdURr7d8pOVlc-alkfRg");
 	$MrSuicideSheep = getVideosFromPlaylistV3($key, "UU5nc_ZtjKW1htCVZVRxlQAQ");
-	
+	$NoCopyrightSounds = getVideosFromPlaylistV3($key, "UU_aEa8K-EOJ3D6gOs7HcyNg");
+	$MixHound = getVideosFromPlaylistV3($key, "UU_jxnWLGJ2eQK4en3UblKEw");
+	$AirwaveMusicTV = getVideosFromPlaylistV3($key, "UUwIgPuUJXuf2nY-nKsEvLOg");
+	$Proximity = getVideosFromPlaylistV3($key, "UU3ifTl5zKiCAhHIBQYcaTeg");
+
 	$all_array = array_merge($PerfectElectroMusic, $LDM, $xKito, $MrSuicideSheep);
 	shuffle($all_array);
 	
@@ -80,13 +84,13 @@
 	
 	?>
 	var ids = <?php echo json_encode($all_array);?>;
-    var currentid = 0;
+	var currentid = 0;
 	
 	var player;
 	var interval;
 	
-    $(document).ready(function(){
-        $("#pause").click(function(){
+	$(document).ready(function(){
+		$("#pause").click(function(){
 			player.pauseVideo();
 		});
 		$("#play").click(function(){
@@ -95,7 +99,7 @@
 		$("#next").click(function(){
 			playNext();
 		});
-    });
+	});
 
 	function playNext(){
 		clearInterval(interval);
