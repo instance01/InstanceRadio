@@ -18,7 +18,7 @@
 	$AirwaveMusicTV = getVideosFromPlaylistV3($key, "UUwIgPuUJXuf2nY-nKsEvLOg");
 	$Proximity = getVideosFromPlaylistV3($key, "UU3ifTl5zKiCAhHIBQYcaTeg");
 
-	$all_array = array_merge($PerfectElectroMusic, $LDM, $xKito, $MrSuicideSheep);
+	$all_array = array_merge($PerfectElectroMusic, $LDM, $xKito, $MrSuicideSheep, $NoCopyrightSounds, $MixHound, $AirwaveMusicTV, $Proximity);
 	shuffle($all_array);
 	
 	function getSSLPageContents($url) {
