@@ -17,8 +17,15 @@
 	$MixHound = getVideosFromPlaylistV3($key, "UU_jxnWLGJ2eQK4en3UblKEw");
 	$AirwaveMusicTV = getVideosFromPlaylistV3($key, "UUwIgPuUJXuf2nY-nKsEvLOg");
 	$Proximity = getVideosFromPlaylistV3($key, "UU3ifTl5zKiCAhHIBQYcaTeg");
+	$WhySoDank = getVideosFromPlaylistV3($key, "UUjE1fSNLI_RzC8-ZjkqHH9Q");
+	$Liquicity = getVideosFromPlaylistV3($key, "UUSXm6c-n6lsjtyjvdD0bFVw");
+	$Berzox = getVideosFromPlaylistV3($key, "UUyePQ8y0eJQ5E-EuiaE29Xg");
+	$Monstafluff = getVideosFromPlaylistV3($key, "UUNqFDjYTexJDET3rPDrmJKg");
+	$MajesticCastle = getVideosFromPlaylistV3($key, "UUXIyz409s7bNWVcM-vjfdVA");
+	$GalaxyMusic = getVideosFromPlaylistV3($key, "UUIKF1msqN7lW9gplsifOPkQ");
+	$Fluidfied = getVideosFromPlaylistV3($key, "UUTPjZ7UC8NgcZI8UKzb3rLw");
 
-	$all_array = array_merge($PerfectElectroMusic, $LDM, $xKito, $MrSuicideSheep, $NoCopyrightSounds, $MixHound, $AirwaveMusicTV, $Proximity);
+	$all_array = array_merge($PerfectElectroMusic, $LDM, $xKito, $MrSuicideSheep, $NoCopyrightSounds, $MixHound, $AirwaveMusicTV, $Proximity, $WhySoDank, $Liquicity, $Berzox, $Monstafluff, $MajesticCastle, $GalaxyMusic, $Fluidfied);
 	shuffle($all_array);
 	
 	function getSSLPageContents($url) {
@@ -83,6 +90,7 @@
 	}
 	
 	?>
+
 	var ids = <?php echo json_encode($all_array);?>;
 	var currentid = 0;
 	
