@@ -14,3 +14,10 @@ Will currently play the 50 latest video uploads from the following channels and 
 - MixHound
 - AirwaveMusicTV
 - Proximity
+- WhySoDank
+- Liquicity
+- Berzox
+- Monstafluff
+- MajesticCastle
+- GalaxyMusic
+- Fluidfied
