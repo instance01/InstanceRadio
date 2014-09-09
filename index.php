@@ -139,7 +139,8 @@
 			},
 			events: {
 				'onReady': onPlayerReady,
-				'onStateChange': onPlayerStateChange
+				'onStateChange': onPlayerStateChange,
+				'onError': onError
 			}
 		});
 	}
@@ -152,6 +153,10 @@
 		if(event.data === 0) {          
 			playNext();
 		}
+	}
+	
+	function onError(event){
+		playNext();
 	}
 	
 	
