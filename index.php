@@ -3,11 +3,20 @@
 <head>
 <link rel="stylesheet" type="text/css" href="s/css/semantic.min.css">
 <script type="text/javascript" src="jquery-2.1.1.min.js"></script>
-<script src="http://www.youtube.com/player_api"></script>
+<script src="https://www.youtube.com/player_api"></script>
 <script type="text/javascript">
 	<?php
 	include 'config.php';
 	$all_array = array();
+	
+	$maxResults = 50;
+	
+	if(isset($_GET['latestonly']) || isset($_GET['latest'])){
+		$maxResults = 10;
+	}
+	if(isset($_GET['maxresults'])){
+		$maxResults = $_GET['maxresults'];
+	}
 	
 	$PerfectElectroMusic = getVideosFromPlaylistV3($key, "UUtCcPJl-cIG-mRiIyg-PKsQ");
 	$LDM = getVideosFromPlaylistV3($key, "UUDl6xIISC4tm38lzmcHvDiQ");
@@ -46,13 +55,14 @@
 
 	// uses google api v3
 	function getVideosFromPlaylistV3($key, $str){
-		$contents = getSSLPageContents("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=".$str."&key=".$key);
+		global $maxResults;
+		$contents = getSSLPageContents("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=".$maxResults."&playlistId=".$str."&key=".$key);
 		$lastvideoPos = 0;
-		$lasttitlePos =0;
+		$lasttitlePos = 0;
 		$videos = array();
 
 		$i = 0;
-		
+
 		while (($lastvideoPos = strpos($contents, '"videoId": "', $lastvideoPos)) !== false) {
 			$pos = $lastvideoPos + strlen('"videoId": "');
 			$lasttitlePos = strpos($contents, '"title": "', $lasttitlePos) + strlen('"title": "');
@@ -62,7 +72,7 @@
 			$i++;
 			$lastvideoPos = $pos;
 		}
-		
+
 		return $videos;
 	}
 	
