@@ -19,7 +19,7 @@
 	}
 	
 	$PerfectElectroMusic = getVideosFromPlaylistV3($key, "UUtCcPJl-cIG-mRiIyg-PKsQ");
-	$LDM = getVideosFromPlaylistV3($key, "UUDl6xIISC4tm38lzmcHvDiQ");
+	/*$LDM = getVideosFromPlaylistV3($key, "UUDl6xIISC4tm38lzmcHvDiQ");
 	$xKito = getVideosFromPlaylistV3($key, "UUMOgdURr7d8pOVlc-alkfRg");
 	$MrSuicideSheep = getVideosFromPlaylistV3($key, "UU5nc_ZtjKW1htCVZVRxlQAQ");
 	$NoCopyrightSounds = getVideosFromPlaylistV3($key, "UU_aEa8K-EOJ3D6gOs7HcyNg");
@@ -32,23 +32,27 @@
 	$Monstafluff = getVideosFromPlaylistV3($key, "UUNqFDjYTexJDET3rPDrmJKg");
 	$MajesticCastle = getVideosFromPlaylistV3($key, "UUXIyz409s7bNWVcM-vjfdVA");
 	$GalaxyMusic = getVideosFromPlaylistV3($key, "UUIKF1msqN7lW9gplsifOPkQ");
-	$Fluidfied = getVideosFromPlaylistV3($key, "UUTPjZ7UC8NgcZI8UKzb3rLw");
+	$Fluidfied = getVideosFromPlaylistV3($key, "UUTPjZ7UC8NgcZI8UKzb3rLw");*/
 
-	$all_array = array_merge($PerfectElectroMusic, $LDM, $xKito, $MrSuicideSheep, $NoCopyrightSounds, $MixHound, $AirwaveMusicTV, $Proximity, $WhySoDank, $Liquicity, $Berzox, $Monstafluff, $MajesticCastle, $GalaxyMusic, $Fluidfied);
+	//$all_array = array_merge($PerfectElectroMusic, $LDM, $xKito, $MrSuicideSheep, $NoCopyrightSounds, $MixHound, $AirwaveMusicTV, $Proximity, $WhySoDank, $Liquicity, $Berzox, $Monstafluff, $MajesticCastle, $GalaxyMusic, $Fluidfied);
+	$all_array = $PerfectElectroMusic;
+	
 	shuffle($all_array);
 	
 	function getSSLPageContents($url) {
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
 		curl_setopt($ch, CURLOPT_HEADER, false);
 		@curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_REFERER, "instancedev.com");
 
-		curl_setopt($ch, CURLOPT_TIMEOUT, 1);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 
 		$result = curl_exec($ch);
+
 		curl_close($ch);
 		return $result;
 	}
@@ -56,19 +60,16 @@
 	// uses google api v3
 	function getVideosFromPlaylistV3($key, $str){
 		global $maxResults;
-		$contents = getSSLPageContents("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=".$maxResults."&playlistId=".$str."&key=".$key);
+		$contents = getSSLPageContents("https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=".$maxResults."&playlistId=".$str."&key=".$key);
 		$lastvideoPos = 0;
-		$lasttitlePos = 0;
 		$videos = array();
 
 		$i = 0;
 
 		while (($lastvideoPos = strpos($contents, '"videoId": "', $lastvideoPos)) !== false) {
 			$pos = $lastvideoPos + strlen('"videoId": "');
-			$lasttitlePos = strpos($contents, '"title": "', $lasttitlePos) + strlen('"title": "');
 			$video = substr($contents, $pos,  strpos($contents, '"', $pos + 1) - $pos);
-			$title = substr($contents, $lasttitlePos,  strpos($contents, '"', $lasttitlePos + 1) - $lasttitlePos);
-			$videos[$i] = array($video, $title);
+			$videos[$i] = $video;
 			$i++;
 			$lastvideoPos = $pos;
 		}
@@ -117,13 +118,49 @@
 		$("#next").click(function(){
 			playNext();
 		});
+		
+		getVideosFromPlaylistV3("UUDl6xIISC4tm38lzmcHvDiQ");
+		getVideosFromPlaylistV3("UUMOgdURr7d8pOVlc-alkfRg");
+		getVideosFromPlaylistV3("UU5nc_ZtjKW1htCVZVRxlQAQ");
+		getVideosFromPlaylistV3("UU_aEa8K-EOJ3D6gOs7HcyNg");
+		getVideosFromPlaylistV3("UU_jxnWLGJ2eQK4en3UblKEw");
+		getVideosFromPlaylistV3("UUwIgPuUJXuf2nY-nKsEvLOg");
+		getVideosFromPlaylistV3("UU3ifTl5zKiCAhHIBQYcaTeg");
+		getVideosFromPlaylistV3("UUjE1fSNLI_RzC8-ZjkqHH9Q");
+		getVideosFromPlaylistV3("UUSXm6c-n6lsjtyjvdD0bFVw");
+		getVideosFromPlaylistV3("UUyePQ8y0eJQ5E-EuiaE29Xg");
+		getVideosFromPlaylistV3("UUNqFDjYTexJDET3rPDrmJKg");
+		getVideosFromPlaylistV3("UUXIyz409s7bNWVcM-vjfdVA");
+		getVideosFromPlaylistV3("UUIKF1msqN7lW9gplsifOPkQ");
+		getVideosFromPlaylistV3("UUTPjZ7UC8NgcZI8UKzb3rLw");
+		
+		
 	});
+	
+	function getVideosFromPlaylistV3(str){
+		$.ajax({
+			url: "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=<?php echo($maxResults);?>&playlistId=" + str + "&key=<?php echo($key);?>",
+		})
+		.done(function(data) {
+			for (var key in data.items) {
+				var itemobj = data.items[key];
+				var videoId = itemobj["contentDetails"]["videoId"];
+				ids.push(videoId);
+			}
+			shuffle(ids);
+			$("title").html(ids.length);
+		});
+
+	}
+	
+	function shuffle(o){
+		for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+		return o;
+	};
 
 	function playNext(){
 		clearInterval(interval);
-		//$('#yt').attr('src', "https://www.youtube.com/embed/" + ids[currentid] + "?autoplay=1&controls=1&rel=0&showinfo=0&autohide=1&iv_load_policy=3");
-		player.loadVideoById(ids[currentid][0]);
-		document.title = ids[currentid][1];
+		player.loadVideoById(ids[currentid]);
 		interval = setInterval(calcProgress, 500); //check status
 		currentid++;
 	}
@@ -163,6 +200,7 @@
 		if(event.data === 0) {          
 			playNext();
 		}
+		$("title").html(player.getVideoData().title);
 	}
 	
 	function onError(event){
