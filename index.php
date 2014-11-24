@@ -19,22 +19,8 @@
 	}
 	
 	$PerfectElectroMusic = getVideosFromPlaylistV3($key, "UUtCcPJl-cIG-mRiIyg-PKsQ");
-	/*$LDM = getVideosFromPlaylistV3($key, "UUDl6xIISC4tm38lzmcHvDiQ");
-	$xKito = getVideosFromPlaylistV3($key, "UUMOgdURr7d8pOVlc-alkfRg");
-	$MrSuicideSheep = getVideosFromPlaylistV3($key, "UU5nc_ZtjKW1htCVZVRxlQAQ");
-	$NoCopyrightSounds = getVideosFromPlaylistV3($key, "UU_aEa8K-EOJ3D6gOs7HcyNg");
-	$MixHound = getVideosFromPlaylistV3($key, "UU_jxnWLGJ2eQK4en3UblKEw");
-	$AirwaveMusicTV = getVideosFromPlaylistV3($key, "UUwIgPuUJXuf2nY-nKsEvLOg");
-	$Proximity = getVideosFromPlaylistV3($key, "UU3ifTl5zKiCAhHIBQYcaTeg");
-	$WhySoDank = getVideosFromPlaylistV3($key, "UUjE1fSNLI_RzC8-ZjkqHH9Q");
-	$Liquicity = getVideosFromPlaylistV3($key, "UUSXm6c-n6lsjtyjvdD0bFVw");
-	$Berzox = getVideosFromPlaylistV3($key, "UUyePQ8y0eJQ5E-EuiaE29Xg");
-	$Monstafluff = getVideosFromPlaylistV3($key, "UUNqFDjYTexJDET3rPDrmJKg");
-	$MajesticCastle = getVideosFromPlaylistV3($key, "UUXIyz409s7bNWVcM-vjfdVA");
-	$GalaxyMusic = getVideosFromPlaylistV3($key, "UUIKF1msqN7lW9gplsifOPkQ");
-	$Fluidfied = getVideosFromPlaylistV3($key, "UUTPjZ7UC8NgcZI8UKzb3rLw");*/
+	// All others moved down to Ajax Calls
 
-	//$all_array = array_merge($PerfectElectroMusic, $LDM, $xKito, $MrSuicideSheep, $NoCopyrightSounds, $MixHound, $AirwaveMusicTV, $Proximity, $WhySoDank, $Liquicity, $Berzox, $Monstafluff, $MajesticCastle, $GalaxyMusic, $Fluidfied);
 	$all_array = $PerfectElectroMusic;
 	
 	shuffle($all_array);
@@ -119,22 +105,24 @@
 			playNext();
 		});
 		
-		getVideosFromPlaylistV3("UUDl6xIISC4tm38lzmcHvDiQ");
-		getVideosFromPlaylistV3("UUMOgdURr7d8pOVlc-alkfRg");
-		getVideosFromPlaylistV3("UU5nc_ZtjKW1htCVZVRxlQAQ");
-		getVideosFromPlaylistV3("UU_aEa8K-EOJ3D6gOs7HcyNg");
-		getVideosFromPlaylistV3("UU_jxnWLGJ2eQK4en3UblKEw");
-		getVideosFromPlaylistV3("UUwIgPuUJXuf2nY-nKsEvLOg");
-		getVideosFromPlaylistV3("UU3ifTl5zKiCAhHIBQYcaTeg");
-		getVideosFromPlaylistV3("UUjE1fSNLI_RzC8-ZjkqHH9Q");
-		getVideosFromPlaylistV3("UUSXm6c-n6lsjtyjvdD0bFVw");
-		getVideosFromPlaylistV3("UUyePQ8y0eJQ5E-EuiaE29Xg");
-		getVideosFromPlaylistV3("UUNqFDjYTexJDET3rPDrmJKg");
-		getVideosFromPlaylistV3("UUXIyz409s7bNWVcM-vjfdVA");
-		getVideosFromPlaylistV3("UUIKF1msqN7lW9gplsifOPkQ");
-		getVideosFromPlaylistV3("UUTPjZ7UC8NgcZI8UKzb3rLw");
-		
-		
+		// PerfectElectroMusic is already preloaded, now we load all the others afterwards:
+		getVideosFromPlaylistV3("UUDl6xIISC4tm38lzmcHvDiQ"); // LDM
+		getVideosFromPlaylistV3("UUMOgdURr7d8pOVlc-alkfRg"); // xKito
+		getVideosFromPlaylistV3("UUE_4AzEG60_GRBg4im9tKHg"); // xKito 2nd!
+		getVideosFromPlaylistV3("UU5nc_ZtjKW1htCVZVRxlQAQ"); // MrSuicideSheep
+		getVideosFromPlaylistV3("UU_aEa8K-EOJ3D6gOs7HcyNg"); // NoCopyrightSounds
+		getVideosFromPlaylistV3("UU_jxnWLGJ2eQK4en3UblKEw"); // MixHound
+		getVideosFromPlaylistV3("UUwIgPuUJXuf2nY-nKsEvLOg"); // AirwaveMusicTV
+		getVideosFromPlaylistV3("UU3ifTl5zKiCAhHIBQYcaTeg"); // Proximity
+		getVideosFromPlaylistV3("UUjE1fSNLI_RzC8-ZjkqHH9Q"); // WhySoDank
+		getVideosFromPlaylistV3("UUSXm6c-n6lsjtyjvdD0bFVw"); // Liquicity
+		getVideosFromPlaylistV3("UUyePQ8y0eJQ5E-EuiaE29Xg"); // Berzox
+		getVideosFromPlaylistV3("UUNqFDjYTexJDET3rPDrmJKg"); // Monstafluff
+		getVideosFromPlaylistV3("UUXIyz409s7bNWVcM-vjfdVA"); // MajesticCastle
+		getVideosFromPlaylistV3("UUIKF1msqN7lW9gplsifOPkQ"); // GalaxyMusic
+		getVideosFromPlaylistV3("UUTPjZ7UC8NgcZI8UKzb3rLw"); // Fluidfied
+		getVideosFromPlaylistV3("PL47GfNryB12uTUdaeDxlbBhGZQLVKJvoT"); // Arctic Empire
+
 	});
 	
 	function getVideosFromPlaylistV3(str){
