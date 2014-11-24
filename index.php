@@ -122,6 +122,7 @@
 		getVideosFromPlaylistV3("UUIKF1msqN7lW9gplsifOPkQ"); // GalaxyMusic
 		getVideosFromPlaylistV3("UUTPjZ7UC8NgcZI8UKzb3rLw"); // Fluidfied
 		getVideosFromPlaylistV3("PL47GfNryB12uTUdaeDxlbBhGZQLVKJvoT"); // Arctic Empire
+		getVideosFromPlaylistV3("UUoHJ5m7J27_u96gksCkHnlg"); // eoenetwork
 
 	});
 	
