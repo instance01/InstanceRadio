@@ -21,3 +21,6 @@ Will currently play the 50 latest video uploads from the following channels and 
 - MajesticCastle
 - GalaxyMusic
 - Fluidfied
+- Diversity Promotions
+- MA Dubstep
+- MrRevillz
