@@ -67,6 +67,15 @@ label{
     color: white;
     cursor: pointer;
 }
+#resultsOption{
+	color: white;
+	margin-top: 15px;
+}
+#resCount{
+	color: white;
+	float: left;
+	font-size: 14px;
+}
 
 /* Webkit Only */
 ::-webkit-scrollbar{

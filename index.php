@@ -229,13 +229,32 @@
 		
 	}
 	
+	var resCountVal = 50;
+	function updateResCount(value){
+		resCountVal = value;
+		$("#resCount").html(value);
+	}
+	
+	function reloadPage(){
+		var url = window.location.href;    
+		if (url.indexOf("?") > -1) {
+			url = url.substring(0, url.indexOf("?")) + "?maxResults=" + resCountVal;
+		}else{
+			url += "?maxResults=" + resCountVal;
+		}
+		window.location.href = url;	
+	}
+	
 	
 </script>
 </head>
 <body>
 
 <div class="channellist">
-	<div class="controls"><center><div id="next" class="ui compact button" onclick="document.location.reload();">Reload</div></center></div>
+	<div class="controls">
+		<div id="next" class="ui compact button" onclick="reloadPage()">Reload</div>
+		<div id="resultsOption">Results per channel: <input type="range" min=1 max=50 value=<?php echo($maxResults);?> id="results" step=1 oninput="updateResCount(value)"> <div id="resCount"><?php echo($maxResults);?></div></div>
+	</div>
 </div>
 
 <div class="playlist">
@@ -252,6 +271,9 @@
 			</div>
 			<div id="settings" class="ui compact button">
 				<i class="setting icon"></i>
+			</div>
+			<div>
+				<!-- placeholder -->
 			</div>
 		</div>
 	</div>
