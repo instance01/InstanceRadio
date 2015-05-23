@@ -98,7 +98,7 @@
 	
 	function allAjaxCallsDone(){
 		var playlist = $(".playlist");
-		for(var i in ids){
+		for (var i in ids) {
 			playlist.html(playlist.html() + "<div class='playlistitem' id='" + i + "'>" + ids[i].title + "</div>");
 		}
 		$(".playlistitem").bind("click", function(){
@@ -122,11 +122,11 @@
 	}
 
 	function togglePauseButton(btn){
-		if(playing){
+		if (playing) {
 			playing = false;
 			player.pauseVideo();
 			setPlayButtonValue("play");
-		}else{
+		} else {
 			playing = true;
 			player.playVideo();
 			setPlayButtonValue("pause");
@@ -146,7 +146,9 @@
 				var itemobj = data.items[key];
 				var videoTitle = itemobj["snippet"]["title"];
 				var videoId = itemobj["contentDetails"]["videoId"];
-				console.log(videoTitle + " " + videoId);
+				if (debug) {
+					console.log(videoTitle + " " + videoId);
+				}
 				var node = {title: videoTitle, id: videoId};
 				ids.push(node);
 			}
@@ -187,7 +189,7 @@
 		player = new YT.Player('yt', {
 			height: window.innerHeight,
 			width: window.innerWidth,
-			videoId: 'JKL6ZhObBQs',
+			//videoId: 'JKL6ZhObBQs',
 			playerVars: {
 				autoplay: 1,
 				controls: 0,
