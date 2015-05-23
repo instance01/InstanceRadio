@@ -1,7 +1,7 @@
 InstanceRadio
 =============
 
-Youtube playlist player (kinda webradio).
+Youtube playlist player.
 
 
 Will currently play the 50 latest video uploads from the following channels and shuffle them:
@@ -24,3 +24,7 @@ Will currently play the 50 latest video uploads from the following channels and 
 - Diversity Promotions
 - MA Dubstep
 - MrRevillz
+- Variety Music
+- Clown
+- Niiiiiiiiiiii
+- MrMoMMusic
