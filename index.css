@@ -3,6 +3,17 @@ body{
     font-size: 12px;
     margin: 0;
 }
+.controls{
+    width: 100%;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    text-align: center;
+}
+.controlbuttons{
+    display: inline-block;
+}
+
 .playlist{
     position: absolute;
     top: 0px;
@@ -25,6 +36,36 @@ body{
 }
 .playlistitem:hover{
     background-color: rgba(0, 0, 0, 0.7);
+}
+.playlistitem.darkitem{
+    background-color: rgba(0, 0, 0, 0.55);
+    border-color: #3b83c0;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.channellist{
+    position: absolute;
+    top: 0px;
+    margin: 2.5%;
+    padding: 0px;
+    left: 0px;
+    width: 15%;
+    min-width: 150px;
+    max-width: 250px;
+    max-height: 500px;
+    height: 85%;
+    background-color: rgba(0, 0, 0, 0.2);
+    overflow: auto;
+}
+label{
+    color: white!important;
+}
+.channellistitem{
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    cursor: pointer;
 }
 
 /* Webkit Only */
