@@ -75,7 +75,7 @@
 		var channellist = $(".channellist");
 		for (var i = 0; i < channels.length; i++) {
 			var disabled = true;
-			if($.cookie(channels[i][0]) === undefined){ // channel not disabled, add to deferreds arrays
+			if($.cookie(channels[i][0]) === undefined){ // channel not disabled, add to deferreds array
 				deferreds.push(getVideosFromPlaylistV3(channels[i][1]));
 				disabled = false;
 			}
@@ -117,6 +117,11 @@
 		$("#settings").bind("click", function(){
 			channellistvisible ? $(".channellist").hide(0) : $(".channellist").fadeIn(450);;
 			channellistvisible = !channellistvisible;
+		});
+		$("#youtubebtn").bind("click", function(){
+			if(currentid > -1){
+				window.open("http://youtube.com/watch?v=" + ids[currentid - 1].id);
+			}
 		});
 		playNext();
 	}
@@ -257,8 +262,8 @@
 	</div>
 </div>
 
-<div class="playlist">
-	<div class="controls">
+<div class="playlistparent">
+	<div class="controls playercontrols">
 		<div class="ui icon buttons controlbuttons">
 			<div class="ui blue top attached progress">
 				<div class="bar" style="min-width: 0px!important"></div>
@@ -272,13 +277,19 @@
 			<div id="settings" class="ui compact button">
 				<i class="setting icon"></i>
 			</div>
+			<div id="youtubebtn" class="ui compact button">
+				<i class="youtube icon"></i>
+			</div>
 			<div>
 				<!-- placeholder -->
 			</div>
 		</div>
 	</div>
+	<div class="playlist">
+		
+	</div>
 </div>
-<div id='yt' style='position: absolute; top: 0px; left: -1px; z-index: -1'></div>
+<div id='yt' style='position: absolute; top: 0px; left: 0px; z-index: -1; width: 100%; height: 100%'></div>
 
 </body>
 </html>
