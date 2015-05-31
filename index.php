@@ -12,7 +12,7 @@
 		include 'config.php';
 		$all_array = array();
 
-		$maxResults = 50;
+		$maxResults = 20; // max is 50
 
 		if(isset($_GET['latestonly']) || isset($_GET['latest'])){
 			$maxResults = 10;
@@ -58,7 +58,11 @@
 		["VarietyMusic", "UUkFKSmbFIVQ1xY6j9vJlCcA"],
 		["Clown", "UUT4e_djPUZOkOLTZzTtnxUQ"],
 		["Niiiiiiiiiiii", "UUmsh_oOrl1hby7P1ZUx5Yfw"],
-		["MrMoMMusic", "UUJBpeNOjvbn9rRte3w_Kklg"]
+		["MrMoMMusic", "UUJBpeNOjvbn9rRte3w_Kklg"],
+		["WaveMusic", "UUbuK8xxu2P_sqoMnDsoBrrg"],
+		["NightcoreReality", "PUqX8hO4JWM6IJfEabbZmhUw"],
+		["CloudKid", "UUSa8IUd1uEjlREMa21I3ZPQ"],
+		["TheLalaTranceGirl", "UUMQBva6MUyidoNmcV8gIV9g"]
 	];
 
 	$(document).ready(function(){

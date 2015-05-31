@@ -4,7 +4,7 @@ InstanceRadio
 Youtube playlist player.
 
 
-Will currently play the 50 latest video uploads from the following channels and shuffle them:
+Will currently play the 20 latest video uploads from the following channels and shuffle them:
 
 - PerfectElectroMusic
 - LDM
@@ -21,6 +21,8 @@ Will currently play the 50 latest video uploads from the following channels and 
 - MajesticCastle
 - GalaxyMusic
 - Fluidfied
+- Arctic Empire
+- eoenetwork
 - Diversity Promotions
 - MA Dubstep
 - MrRevillz
@@ -28,3 +30,7 @@ Will currently play the 50 latest video uploads from the following channels and 
 - Clown
 - Niiiiiiiiiiii
 - MrMoMMusic
+- WaveMusic
+- NightcoreReality
+- CloudKid
+- TheLalaTranceGirl
