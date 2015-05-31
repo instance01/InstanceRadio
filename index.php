@@ -100,6 +100,13 @@
 
 	});
 	
+	function inNewTabFix()
+	{
+		if(currentid > 0){
+			$("<a>").attr("href", "http://youtube.com/watch?v=" + ids[currentid - 1].id).attr("target", "_blank")[0].click();
+		}
+	}
+	
 	function allAjaxCallsDone(){
 		var playlist = $(".playlist");
 		for (var i in ids) {
@@ -121,11 +128,6 @@
 		$("#settings").bind("click", function(){
 			channellistvisible ? $(".channellist").hide(0) : $(".channellist").fadeIn(450);;
 			channellistvisible = !channellistvisible;
-		});
-		$("#youtubebtn").bind("click", function(){
-			if(currentid > -1){
-				window.open("http://youtube.com/watch?v=" + ids[currentid - 1].id);
-			}
 		});
 		playNext();
 	}
@@ -170,7 +172,7 @@
 	function shuffle(o){
 		for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
 		return o;
-	};
+	}
 
 	function playNext(){
 		playing = true;
@@ -235,10 +237,9 @@
 		if(!debug){
 			playNext();
 		}
-		
 	}
 	
-	var resCountVal = 50;
+	var resCountVal = <?php echo($maxResults);?>;
 	function updateResCount(value){
 		resCountVal = value;
 		$("#resCount").html(value);
@@ -248,7 +249,7 @@
 		var url = window.location.href;    
 		if (url.indexOf("?") > -1) {
 			url = url.substring(0, url.indexOf("?")) + "?maxResults=" + resCountVal;
-		}else{
+		} else {
 			url += "?maxResults=" + resCountVal;
 		}
 		window.location.href = url;	
@@ -262,7 +263,7 @@
 <div class="channellist">
 	<div class="controls">
 		<div id="next" class="ui compact button" onclick="reloadPage()">Reload</div>
-		<div id="resultsOption">Results per channel: <input type="range" min=1 max=50 value=<?php echo($maxResults);?> id="results" step=1 oninput="updateResCount(value)"> <div id="resCount"><?php echo($maxResults);?></div></div>
+		<div id="resultsOption">Results per channel: <input type="range" style="max-width: 150px" min=1 max=50 value=<?php echo($maxResults);?> id="results" step=1 oninput="updateResCount(value)" onchange="updateResCount(value)"> <div id="resCount"><?php echo($maxResults);?></div></div>
 	</div>
 </div>
 
@@ -281,7 +282,7 @@
 			<div id="settings" class="ui compact button">
 				<i class="setting icon"></i>
 			</div>
-			<div id="youtubebtn" class="ui compact button">
+			<div id="youtubebtn" onclick="inNewTabFix();" class="ui compact button">
 				<i class="youtube icon"></i>
 			</div>
 			<div>
