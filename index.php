@@ -60,7 +60,7 @@
 		["Niiiiiiiiiiii", "UUmsh_oOrl1hby7P1ZUx5Yfw"],
 		["MrMoMMusic", "UUJBpeNOjvbn9rRte3w_Kklg"],
 		["WaveMusic", "UUbuK8xxu2P_sqoMnDsoBrrg"],
-		["NightcoreReality", "PUqX8hO4JWM6IJfEabbZmhUw"],
+		["NightcoreReality", "UUqX8hO4JWM6IJfEabbZmhUw"],
 		["CloudKid", "UUSa8IUd1uEjlREMa21I3ZPQ"],
 		["TheLalaTranceGirl", "UUMQBva6MUyidoNmcV8gIV9g"]
 	];
@@ -68,7 +68,8 @@
 	$(document).ready(function(){
 		$(".channellist").hide(0);
 		$('.ui.checkbox').checkbox();
-		
+		$('.cookie.nag').nag({key: 'accepts-cookies', value: true});
+
 		if (document.cookie.indexOf("visited") >= 0) {
 			
 		} else {
@@ -295,6 +296,13 @@
 	</div>
 </div>
 <div id='yt' style='position: absolute; top: 0px; left: 0px; z-index: -1; width: 100%; height: 100%'></div>
+
+<div class="ui inline cookie nag">
+	<span class="title">
+	Cookies are used to save your channel preferences.
+	</span>
+	<i class="close icon"></i>
+</div>
 
 </body>
 </html>
