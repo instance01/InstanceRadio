@@ -151,7 +151,8 @@
 
 	function getVideosFromPlaylistV3(str){
 		var call = $.ajax({
-			url: "https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails,snippet&maxResults=<?php echo($maxResults);?>&playlistId=" + str + "&key=<?php echo($key);?>",
+			url: "requests.php?url=" + encodeURIComponent("https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails,snippet&maxResults=<?php echo($maxResults);?>&playlistId=" + str + "&key="),
+			dataType: "json"
 		})
 		.done(function(data) {
 			for (var key in data.items) {
