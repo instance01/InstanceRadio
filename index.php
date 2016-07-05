@@ -3,19 +3,22 @@
 <head>
 <link rel="stylesheet" type="text/css" href="s/s.min.css">
 <script type="text/javascript" src="jquery-2.1.1.min.js"></script>
+
 <script type="text/javascript" src="jquery.cookie-1.4.1.min.js"></script>
 <script type="text/javascript" src="s/s.min.js"></script>
+<script type="text/javascript" src="jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
 <script src="https://www.youtube.com/player_api"></script>
 <link rel="stylesheet" type="text/css" href="index.css">
+<link rel="stylesheet" type="text/css" href="jquery-ui-1.11.4.custom/jquery-ui.min.css">
 <script type="text/javascript">
 	<?php
 		include 'config.php';
 		$all_array = array();
 
-		$maxResults = 20; // max is 50
+		$maxResults = 5; // max is 50
 
 		if(isset($_GET['latestonly']) || isset($_GET['latest'])){
-			$maxResults = 10;
+			$maxResults = 2;
 		}
 		$lowercase_params = array_change_key_case($_GET, CASE_LOWER);
 		if(isset($lowercase_params['maxresults'])){
@@ -32,6 +35,7 @@
 	var playing = false;
 	var debug = false; // TODO CHANGE BACK TO false
  	var channellistvisible = false;
+	var opt_remove_vid = true;
 
 	var channels = [
 		["LDM", "UUDl6xIISC4tm38lzmcHvDiQ"],
@@ -62,13 +66,64 @@
 		["WaveMusic", "UUbuK8xxu2P_sqoMnDsoBrrg"],
 		["NightcoreReality", "UUqX8hO4JWM6IJfEabbZmhUw"],
 		["CloudKid", "UUSa8IUd1uEjlREMa21I3ZPQ"],
-		["TheLalaTranceGirl", "UUMQBva6MUyidoNmcV8gIV9g"]
+		["TheLalaTranceGirl", "UUMQBva6MUyidoNmcV8gIV9g"],
+		["DubstepGutter", "UUG6QEHCBfWZOnv7UVxappyw"],
+		["PenguinMusic", "UU0YSN3ge1paAcKMC_X3ktsw"],
+		["UnitedDubstep", "UUVrYrjXtAIgBbVN1i_FiGtw"],
+		["OneChilledPanda", "UUkUTBwZKwA9ojYqzj6VRlMQ"],
+		["SuicideSheeep", "UULTZddgA_La9H4Ngg99t_QQ"],
+		["TrapNation", "UUa10nxShhzNrCE1o2ZOPztg"],
+		["TrapGutter", "UUaJdK74vrx8Mk6HlwNk0uEQ"],
+		["KoalaKontrol", "UUBYg9_11ErMsFFNR66TRuLA"],
+		["JompaMusic", "UU1WKD9pJt5Sa4DCVaoJSAGw"],
+		["EpicMusicVN", "PL4adbQCQMmoZNMuDUsddQw4r9XWNdLbbI"],
+		["OrionMusicNetwork", "UUdy-3GIGZy2DD65TPg3i1GA"],
+		["InverseNetwork", "UUx5rscERi7IpVS9dO_HCl5A"],
+		["JED", "UUCCs8U1UsY-KlOePhSrMJdg"],
+		["NighTcoreFC", "UU5I3vUh2iNfQ3pCU3sodYRA"],
+		["DeadMusicFC", "UUBsKAivSo21NEubmxiLPUWw"],
+		["CrazyBass Promotions", "UU8uXrhG0n-i6as8V273Mknw"],
+		["BassOneMusic", "UUmyBcA6xsJDuKn_An6wL-EA"],
+		["Lustcore", "UUrNlBy9CwV-sHGbRa6mf1GA"],
+		["KyraPromotions", "UUqolymr8zonJzC08v2wXNrQ"],
+		["RackiePromotions", "UUqPgPXkG6acQomkAewewcNQ"],
+		/*["NightcoreGalaxy", "PLHO3r5TU5dB9xtGsbOcwXVpkiPQiTZiDV"], Now EDMGalaxy */
+		["NexusNetwork", "UUl4UOc8h1ZnO-inFPgAu7gw"],
+		["ReinaXmina", "UUwyU7wNCjTmcrRWws7ZTlXw"],
+		["DroneMusic", "UUQgYaMo37r74iLehFx3YsEQ"],
+		["SynergyMusic", "UUrbRMQk4-CnFZLmLuz0KyHQ"],
+		["KTMMusicRecords", "UUYTNxR2Z4ryz88WRWiaPCdg"],
+		["AgeraPromotions", "UU5HQWGZnatHoYpJm-ViQIDQ"],
+		["MelodyPromotions", "UUKsCyxmVqLsKDPXeQvdnEUA"],
+		["StrobeNetworkRecords", "UUcoYD5HDg8P-gvJU-oDYq5Q"],
+		["AvienCloud", "UUKioNqOX_kOCLcSIWPL_lxQ"],
+		["LostSoundNetWork", "UUDWRMT6Ym4IpMqjX3EhHOlA"],
+		["EDMGalaxy", "PLZclc0JXUCA5ng910IDqr05ZNZkufCEQg"]
 	];
 
 	$(document).ready(function(){
-		$(".channellist").hide(0);
+		$.ajaxPrefilter(function(opts, originalOpts, jqXHR) {
+			var dfd = $.Deferred();
+			jqXHR.done(dfd.resolve);
+
+			jqXHR.fail(function() {
+				var args = Array.prototype.slice.call(arguments);
+				dfd.resolve(args);
+			});
+
+			return dfd.promise(jqXHR);
+		});
+		
+		$(".channellistparent").hide(0);
 		$('.ui.checkbox').checkbox();
 		$('.cookie.nag').nag({key: 'accepts-cookies', value: true});
+		
+		$(document).keydown(function(e){
+			console.log(e.keyCode);
+			if (e.keyCode == 179) { 
+				togglePauseButton();
+			}
+		});
 
 		if (document.cookie.indexOf("visited") >= 0) {
 			
@@ -78,6 +133,10 @@
 		
 		var deferreds = [];
 		var channellist = $(".channellist");
+		if($.cookie("opt_remove_vid") === undefined){
+			opt_remove_vid = false;
+		}
+		channellist.html(channellist.html() + "<div class='channellistitem' id='opt_remove_vid'><div class='ui toggle checkbox'><input type='checkbox' " + (!opt_remove_vid ? "" : "checked='checked'") + " id='opt_remove_vid'><label id='opt_remove_vid'>Remove previous video from queue</label></div></div>");
 		for (var i = 0; i < channels.length; i++) {
 			var disabled = true;
 			if($.cookie(channels[i][0]) === undefined){ // channel not disabled, add to deferreds array
@@ -97,7 +156,7 @@
 			}
 		});
 		
-		$.when.apply($, deferreds).then(allAjaxCallsDone);
+		$.when.apply($, deferreds).then(allAjaxCallsDone, allAjaxCallsDone); // second argument is on failure
 
 	});
 	
@@ -127,9 +186,31 @@
 			playNext();
 		});
 		$("#settings").bind("click", function(){
-			channellistvisible ? $(".channellist").hide(0) : $(".channellist").fadeIn(450);;
+			channellistvisible ? $(".channellistparent").hide(0) : $(".channellistparent").fadeIn(450);
 			channellistvisible = !channellistvisible;
 		});
+				
+		$("#results").slider({
+			range: "min",
+			min: 1,
+			max: 50,
+			value: <?php echo($maxResults);?>,
+			slide: function(event, ui) {
+				updateResCount(ui.value);
+			}
+		});
+		$("#volumeSlider").slider({
+			range: "min",
+			min: 1,
+			max: 100,
+			value: 100,
+			slide: function(event, ui) {
+				player.setVolume(ui.value);
+				$("#volume").html(ui.value);
+			}
+		});
+		$("#results").css("margin", "0 5 0 5");
+		$("#volumeSlider").css("margin", "0 5 0 5");
 		playNext();
 	}
 
@@ -151,7 +232,7 @@
 
 	function getVideosFromPlaylistV3(str){
 		var call = $.ajax({
-			url: "requests.php?url=" + encodeURIComponent("https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails,snippet&maxResults=<?php echo($maxResults);?>&playlistId=" + str + "&key="),
+			url: /*"requests.php?url=" + encodeURIComponent(*/"https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails,snippet&maxResults=<?php echo($maxResults);?>&playlistId=" + str + "&key=<?php echo($key); ?>"/*)*/,
 			dataType: "json"
 		})
 		.done(function(data) {
@@ -180,6 +261,9 @@
 		playing = true;
 		setPlayButtonValue("pause"); // Show pause button as the music is playing right now
 		clearInterval(interval);
+		if(ids.length <= currentid){
+			currentid = 0;
+		}
 		player.loadVideoById(ids[currentid].id);
 		
 		if(currentid - 1 > -1){
@@ -187,6 +271,11 @@
 		}
 		$("#" + lastid).removeClass("darkitem");
 		$("#" + currentid).addClass("darkitem");
+		if(opt_remove_vid && currentid > 0){
+			console.log($("#" + (currentid - 1)).html());
+			$("#" + (currentid - 1)).remove();
+			console.log($("#" + lastid).html());
+		}
 		
 		interval = setInterval(calcProgress, 500);
 		currentid++;
@@ -262,10 +351,17 @@
 </head>
 <body>
 
-<div class="channellist">
-	<div class="controls">
-		<div id="next" class="ui compact button" onclick="reloadPage()">Reload</div>
-		<div id="resultsOption">Results per channel: <input type="range" style="max-width: 150px" min=1 max=50 value=<?php echo($maxResults);?> id="results" step=1 oninput="updateResCount(value)" onchange="updateResCount(value)"> <div id="resCount"><?php echo($maxResults);?></div></div>
+<div class="channellistparent">
+	<div class="channellist">
+		<div class="controls">
+			<div id="next" class="ui compact button" onclick="reloadPage()">Reload</div>
+			<div id="resultsOption">Results per channel: <div id="resCount"><?php echo($maxResults);?></div><div class="slider" id="results"></div></div>
+			<br>
+			Volume: <div id="volume">100</div>
+			<div id="volumeSlider"></div>
+			<br>
+			<!-- Channels get added here -->
+		</div>
 	</div>
 </div>
 
