@@ -4,7 +4,7 @@ InstanceRadio
 Youtube playlist player.
 
 
-Will currently play the 20 latest video uploads from the following channels and shuffle them:
+Will currently play the 1-50 (customizable) latest video uploads from the following channels and shuffle them:
 
 - PerfectElectroMusic
 - LDM
@@ -34,3 +34,34 @@ Will currently play the 20 latest video uploads from the following channels and 
 - NightcoreReality
 - CloudKid
 - TheLalaTranceGirl
+- DubstepGutter
+- PenguinMusic
+- UnitedDubstep
+- OneChilledPanda
+- SuicideSheeep
+- TrapNation
+- TrapGutter
+- KoalaKontrol
+- JompaMusic
+- EpicMusicVN
+- OrionMusicNetwork
+- InverseNetwork
+- JED
+- NighTcoreFC
+- DeadMusicFC
+- CrazyBass Promotions
+- BassOneMusic
+- Lustcore
+- KyraPromotions
+- RackiePromotions
+- NexusNetwork
+- ReinaXmina
+- DroneMusic
+- SynergyMusic
+- KTMMusicRecords
+- AgeraPromotions
+- MelodyPromotions
+- StrobeNetworkRecords
+- AvienCloud
+- LostSoundNetWork
+- EDMGalaxy
